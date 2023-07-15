@@ -1,58 +1,58 @@
 <template>
-  <div class="hello">
+  <div>
     <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    <hr>
+    <div @click="changeName">obj.name:{{ obj.name }}</div>
+    <div>obj.age:{{ obj.age }}</div>
+    <hr>
+    <div @click="changeName2">obj2.name:{{ obj2.name }}</div>
+    <div>obj2.age:{{ obj2.age }}</div>
   </div>
 </template>
 
 <script>
+// reactive
+// 作用: 包裹一个对象,让这个对象具有响应式
+// 参数: 普通对象
+// 返回值: 一个新的 proxy 对象
+// obj2 = reactive(obj)
+// obj叫做源对象(是一个普通对象),不具有响应式
+// obj2是代理对象,是一个proxy对象,具有响应式
+import { reactive } from 'vue'
 export default {
-  name: 'HelloWorld',
-  props: {
+  name:'HelloWorld',
+  props:{
     msg: String
+  },
+  setup () {
+    // 普通对象不具有响应式
+    let obj = {
+      name:'悟空',
+      age:18
+    }
+    let obj2 = reactive(obj)
+    console.log(obj2);
+    console.log(obj2.name);
+
+    let changeName = () => {
+      console.log(11);
+      obj.name += '弼马温'
+    }
+
+    let changeName2 = () => {
+      obj2.name += '齐天大圣'
+    }
+
+    return {
+      obj,
+      changeName,
+      obj2,
+      changeName2
+    }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+<style lang="scss" scoped>
+
 </style>
