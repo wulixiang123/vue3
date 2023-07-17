@@ -1,15 +1,15 @@
 <template>
     <li>
       <label>
-        <input type="checkbox" />
-        <span>xxxxx</span>
+        <input type="checkbox" :checked="todo.isSel"/>
+        <span>{{ todo.content }}</span>
       </label>
       <button class="btn btn-danger" style="display:none">删除</button>
     </li>
   </template>
   
   <script setup lang="ts">
-  
+  defineProps(['todo'])
   </script>
   
   <style scoped>

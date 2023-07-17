@@ -1,12 +1,17 @@
 <template>
     <ul class="todo-main">
-      <Item></Item>
-      <Item></Item>
+      <Item
+      v-for="todo in todos"
+      :key="todo.id"
+      :todo="todo"
+      ></Item>
     </ul>
   </template>
   
   <script setup lang="ts">
   import Item from '@/components/Item.vue'
+
+  defineProps(['todos'])
   </script>
   
   <style scoped>
