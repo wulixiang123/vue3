@@ -9,7 +9,22 @@
   </template>
   
   <script setup lang="ts">
+// 1.数组写法
   defineProps(['todo'])
+//2.对象写法
+//   defineProps({
+//     todo:Object
+//   })
+// 配置对象写法
+// defineProps({
+//     todo:{
+//         type:Object,
+//         required:true,
+//         default:()=>{//required与default是互斥的
+//             return {}
+//         }
+//     }
+// })
   </script>
   
   <style scoped>

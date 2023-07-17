@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        // 数据代理 - 将data配置项中的数据代理当vm实例上
+        // 数据劫持 - 让data中的所有数据具有响应式(数据变,页面跟着变)
+
+        function Vue(options){
+            this.$options = options//把options存到$options配置项中
+            let data = options.data//存的是data的地址
+
+            console.log(data);
+            Object.keys(data)//---> ['msg', 'text']
+
+            // 数据代理
+            Object.keys(data).forEach(key=>{// key->msg  key->text
+                Object.defineProperty(this,key,{
+                    get(){
+                        return data[key]// data['msg']  data['text']
+                    },
+                    set(val){
+                        console.log('给vm实例设置值')
+                        // data[key] = val
+                    }
+                })
+            })
+
+            function defineReactive(data,key,value){
+                Object.defineProperty(data,key,{
+                    get(){
+                        return value
+                    },
+                    set(val){
+                        value = val
+                    }
+                })
+            }
+
+            // 数据劫持
+            Object.keys(data).forEach(key=>{
+                // key -> 'msg'   'text'
+                // value -> data[key] - '我爱你'   '你是个好人'
+                defineReactive(data,key,data[key])// 通过一个函数来写数据劫持
+            })
+        }
+
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                msg:'悟空',
+                text:'美猴王'
+            }
+        })
+
+        console.log(vm);
+        console.log(vm.msg);
+        console.log(vm.text);
+        vm.text = '齐天大圣'
+        console.log(vm.text);
+    </script>
+</body>
+</html>
