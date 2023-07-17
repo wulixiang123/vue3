@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 在vue2中是针对某个属性下的某个属性 msg可以走get方法 text不走
+        // Object.defineProperty(data,'msg',{
+        //     get(){},
+        //     set(){}
+        // })
+        // data.msg
+        // data.text
+
+
+        //Proxy---ES6出的代理
+        // 参数一:源对象
+        // 参数二:配置的拦截器对象
+        
+        let p1 = new Proxy({
+            name:'悟空',
+            age:18
+        },{
+            // 拦截获取值操作
+            get(target,property){
+                console.log('target:',target);//{name: '悟空', age: 18}
+                console.log('key:',property);//name
+                // return target[property]//与下面代码相同
+                return Reflect.get(target,property)
+            },
+            // 拦截设置操作
+            set(target,property,value){
+                console.log('target:',target);//{name: '悟空', age: 18}
+                console.log('property:',property);//name
+                console.log('value:',value);//齐天大圣
+
+                // target[property] = value//与下面代码相同
+                Reflect.set(target,property,value)
+            },
+            // 拦截删除操作符
+            deleteProperty(target,property){
+                console.log('target:',target,'property:',property);
+                // return delete target[property]
+                return Reflect.deleteProperty(target,property)
+            },
+            // 拦截in操作符
+            has(target,property){
+                // return property in target
+                return Reflect.has(target,property)
+            },
+            ownKeys(target){
+                console.log('ownKeys',target);
+                // return ['3','4']
+                return Reflect.ownKeys(target)
+            }
+        })
+        console.log(p1);//Proxy(Object) {name: '悟空', age: 18}
+        p1.name
+        p1.name = '齐天大圣'
+        // delete p1.age
+        // console.log(p1);
+
+
+        // vue3中的reactive包裹一个源对象生成代理对象proxy
+        // 在底层使用的就是new Proxy
+        // let p2 = reactive({name:'沙僧',age:15})
+
+
+        let obj = {
+            name:'八戒',
+            age:16
+        }
+        // // in
+        // // 用于检测属性名是否在该对象身上
+        // // 还可用于检测下标是都在该数组身上
+        // console.log('name' in obj);//true
+        // console.log('hobby' in obj);//false
+
+        // let arr = ['1','2','3']
+        // console.log(0 in arr);//true
+        // console.log(1 in arr);//true
+        // console.log(2 in arr);//true
+        // console.log(3 in arr);//false
+
+        console.log(Object.keys(p1));
+    </script>
+</body>
+</html>
