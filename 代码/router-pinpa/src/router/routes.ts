@@ -34,7 +34,14 @@ const routes:RouteRecordRaw[] = [
             },
             {
                 path:'news',
-                component:()=>import('@/views/News.vue')
+                component:()=>import('@/views/News.vue'),
+                children:[
+                    {
+                        name:'NewsDetail',
+                        path:'newsdetail/:newsId?',
+                        component:()=>import('@/views/NewsDetail.vue')
+                    }
+                ]
             },
             {
                 path:'',
