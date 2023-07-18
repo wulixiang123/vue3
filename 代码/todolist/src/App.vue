@@ -1,7 +1,7 @@
 <template>
   <div class="todo-container">
     <div class="todo-wrap">
-      <Header></Header>
+      <Header :todos="todos" :addTodo="addTodo"></Header>
       <Main :todos="todos"></Main>
       <Footer :todos="todos"></Footer>
     </div>
@@ -9,6 +9,24 @@
 </template>
 
 <script setup lang="ts">
+// #region
+// 1.静态搭建 - 拆组件
+//    注意: 引入的组件必须带有.vue后缀
+// 2.初始化数据展示
+//    App组件中书写数据
+//    传给main组件循环展示item
+//    传给footer组件进行计算展示
+//    注意: 此时Footer组件飘红,到了必须添加TS类型的时候
+//    ref<TodosModel>()
+// 
+//    interface PropsModel {
+//      todos: TodosModel
+//    }
+//    defineProps<PropsModel>()
+// 3.交互
+//    3.1 Header组件交互
+//        
+// #endregion
 import Header from '@/components/Header.vue'
 import Main from '@/components/Main.vue'
 import Footer from '@/components/Footer.vue'
@@ -26,6 +44,10 @@ const todos = ref<TodosModel>([
   {id:2,content:'睡觉',isSel:false},
   {id:3,content:'打豆豆',isSel:true}
 ])
+
+const addTodo = (todo:TodoModel) => {
+  todos.value.unshift(todo)
+}
 
 // // TS中最重要的 接口 和 泛型
 // interface userInfo {
