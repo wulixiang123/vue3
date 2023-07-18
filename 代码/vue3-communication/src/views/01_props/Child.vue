@@ -9,8 +9,8 @@
 
 <script lang="ts" setup>
 import { reactive } from 'vue'
-
-const props = defineProps<{
+// 二、使用TS写法
+const props = defineProps<{// 这里的大括号是interface,见到<>就是interface
   msg:string,
   userInfo:{
     name:string,
@@ -35,4 +35,21 @@ const changeName = () => {
 const changeHandler = () => {
   props.changeUserInfo()//父组件传递过来的方法
 }
+
+
+// 一、不使用TS写法
+// 1. 数组形式
+// const props = defineProps(['msg'])
+// 2. 对象形式
+// const props = defineProps({
+//   msg: String
+// })
+// 3. 配置对象
+// const props = defineProps({
+//   msg: {
+//     type: String,
+//     required: true, // 注意: required 和 default
+//     default: 'qwer' // 注意: 引用类型(对象、数组、函数)默认值需要用函数返回值的形式
+//   }
+// })
 </script>
