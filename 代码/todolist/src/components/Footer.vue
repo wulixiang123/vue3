@@ -6,7 +6,7 @@
       <span>
         <span>已完成{{ selCount }}</span> / 全部{{ todos.length }}
       </span>
-      <button class="btn btn-danger">清除已完成任务</button>
+      <button class="btn btn-danger" @click="deleteSelTodo">清除已完成任务</button>
     </div>
   </template>
   
@@ -15,7 +15,9 @@ import { computed } from 'vue';
 import type { TodoModel,TodosModel } from '@/App.vue';
 
 interface PropsModel{
-  todos:TodosModel
+  todos:TodosModel,
+  checkAll:(bool:boolean) => void
+  deleteSelTodo:() => void
 }
 
 //   defineProps(['todos'])//这样只能给模板用,js拿不到 所以
