@@ -2,7 +2,7 @@
   <div class="todo-container">
     <div class="todo-wrap">
       <Header :todos="todos" :addTodo="addTodo"></Header>
-      <Main :todos="todos"></Main>
+      <Main :todos="todos" :selTodo="selTodo" :deleteTodo="deleteTodo"></Main>
       <Footer :todos="todos"></Footer>
     </div>
   </div>
@@ -45,8 +45,18 @@ const todos = ref<TodosModel>([
   {id:3,content:'打豆豆',isSel:true}
 ])
 
+// 添加
 const addTodo = (todo:TodoModel) => {
   todos.value.unshift(todo)
+}
+// 选中
+const selTodo = (index:number) => {
+  todos.value[index].isSel = !todos.value[index].isSel
+}
+
+// 删除
+const deleteTodo = (index:number) => {
+  todos.value.splice(index,1)
 }
 
 // // TS中最重要的 接口 和 泛型

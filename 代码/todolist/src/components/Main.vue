@@ -1,17 +1,27 @@
 <template>
     <ul class="todo-main">
       <Item
-      v-for="todo in todos"
+      v-for="(todo,index) in todos"
       :key="todo.id"
       :todo="todo"
+      :index="index"
+      :selTodo="selTodo"
+      :deleteTodo="deleteTodo"
       ></Item>
     </ul>
   </template>
   
   <script setup lang="ts">
-  import Item from '@/components/Item.vue'
+  import type { TodosModel } from '@/App.vue';
+import Item from '@/components/Item.vue'
 
-  defineProps(['todos'])
+// defineProps(['todos'])//相当于下面的写法 只不过定义了类型
+
+  defineProps<{
+    todos:TodosModel,
+    selTodo:(idx:number) => void,
+    deleteTodo:(idx:number) => void
+  }>()
   </script>
   
   <style scoped>
