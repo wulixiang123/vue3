@@ -14,7 +14,14 @@ import Main from '@/components/Main.vue'
 import Footer from '@/components/Footer.vue'
 import { ref } from 'vue';
 
-const todos = ref([
+export interface TodoModel{
+  id:number
+  content:string
+  isSel:boolean
+}
+export type TodosModel = TodoModel[]
+
+const todos = ref<TodosModel>([
   {id:1,content:'吃饭',isSel:true},
   {id:2,content:'睡觉',isSel:false},
   {id:3,content:'打豆豆',isSel:true}

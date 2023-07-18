@@ -12,9 +12,14 @@
   
   <script setup lang="ts">
 import { computed } from 'vue';
+import type { TodoModel,TodosModel } from '@/App.vue';
+
+interface PropsModel{
+  todos:TodosModel
+}
 
 //   defineProps(['todos'])//这样只能给模板用,js拿不到 所以
-const props =  defineProps(['todos'])
+const props =  defineProps<PropsModel>()
 
 // 全选
 const isSelAll = computed({
