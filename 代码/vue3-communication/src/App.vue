@@ -13,6 +13,7 @@
       <router-link to="/ref-parent">ref & parent</router-link>&nbsp;&nbsp;
       <router-link to="/provide-inject">provide-inject</router-link>&nbsp;&nbsp;
       <router-link to="/slot">slot</router-link>&nbsp;&nbsp;
+      <router-link to="/mitt">mitt</router-link>&nbsp;&nbsp;
     </div>
     <br>
 

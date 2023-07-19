@@ -35,5 +35,9 @@ export default [
    {
     path: '/slot',
     component: () => import('@/views/08_slot/SlotTest.vue'),
+  },
+  {
+    path: '/mitt',
+    component: () => import('@/views/09_mitt/index.vue'),
   }
 ]
