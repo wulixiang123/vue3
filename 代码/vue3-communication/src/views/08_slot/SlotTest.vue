@@ -5,8 +5,23 @@
     <h2>需求: 自定义TODO列表组件能实现下面需求</h2>
 
     <h2>效果一: 显示TODO列表时, 已完成的TODO为绿色</h2>
-
+    <List :todos="todos">
+      <template #default="{row,$index}">
+        <div :class="{
+          bgGreen:row.isComplete
+        }">{{ $index }} - {{ row.text }}
+        </div>
+      </template>
+    </List>
     <h2>效果二: 显示TODO列表时, 带序号, TODO的颜色为蓝绿搭配</h2>
+    <List :todos="todos">
+      <template #default="{row,$index}">
+        <div :class="{
+          bgGreen:$index % 2 == 0,
+          bgBlue:$index % 2 != 0
+        }">{{ $index }} - {{ row.text }}</div>
+      </template>
+    </List>
   </div>
 </template>
 
@@ -24,4 +39,10 @@ const todos = ref<Users>([
 </script>
 
 <style lang="less" scoped>
+.bgGreen {
+  background-color: greenyellow;
+}
+.bgBlue {
+  background-color: skyblue;
+}
 </style>
